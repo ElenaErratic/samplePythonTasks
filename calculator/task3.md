@@ -41,3 +41,8 @@ n
 Do you want to continue calculations? (y / n):
 n
 ```
+
+Previous stages:
+- Calculator Stage 4: [task](task2.md), [solution](calculator4.py)
+
+- Calculator Stage 3: [task](task1.md), [solution](calculator3.py)
