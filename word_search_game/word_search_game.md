@@ -1,4 +1,7 @@
 # Word Search Game Task
+
+[Solution](word_search_game.py) (2017)
+
 For A3, you will implement a word search game. The game involves a rectangular board of uppercase letters that is read from a file. For example, here are the file contents representing a (tiny) 2 row by 4 column board:
 
 ```
