@@ -17,36 +17,26 @@ Good luck!
 ## Coordinates
 Suppose the top left cell has the coordinates (1, 1) and the bottom right cell has the coordinates (3, 3) like in this table:
 
-(1, 1) (1, 2) (1, 3)
-
-(2, 1) (2, 2) (2, 3)
-
+(1, 1) (1, 2) (1, 3)\
+(2, 1) (2, 2) (2, 3)\
 (3, 1) (3, 2) (3, 3)
 
 ## Example
 The example below shows how your program should work.
 Notice that after `Enter the coordinates:` comes the user input.
 
-\--------
-
-| _ _ _ |
-
-| _ _ _ |
-
-| _ _ _ |
-
+\--------\
+| _ _ _ |\
+| _ _ _ |\
+| _ _ _ |\
 \--------
 
 Enter the coordinates: 2 2
 
-\--------
-
-| _ _ _ |
-
-| _ X _ |
-
-| _ _ _ |
-
+\--------\
+| _ _ _ |\
+| _ X _ |\
+| _ _ _ |\
 \--------
 
 Enter the coordinates: 2 2
@@ -63,74 +53,50 @@ Coordinates should be from 1 to 3!
 
 Enter the coordinates: 1 1
 
-\--------
-
-| O _ _ |
-
-| _ X _ |
-
-| _ _ _ |
-
+\--------\
+| O _ _ |\
+| _ X _ |\
+| _ _ _ |\
 \--------
 
 Enter the coordinates: 3 3
 
-\--------
-
-| O _ _ |
-
-| _ X _ |
-
-| _ _ X |
-
+\--------\
+| O _ _ |\
+| _ X _ |\
+| _ _ X |\
 \--------
 
 Enter the coordinates: 2 1
 
-\--------
-
-| O _ _ |
-
-| O X _ |
-
-| _ _ X |
-
+\--------\
+| O _ _ |\
+| O X _ |\
+| _ _ X |\
 \--------
 
 Enter the coordinates: 3 1
 
-\--------
-
-| O _ _ |
-
-| O X _ |
-
-| X _ X |
-
+\--------\
+| O _ _ |\
+| O X _ |\
+| X _ X |\
 \--------
 
 Enter the coordinates: 2 3
 
-\--------
-
-| O _ _ |
-
-| O X O |
-
-| X _ X |
-
+\--------\
+| O _ _ |\
+| O X O |\
+| X _ X |\
 \--------
 
 Enter the coordinates: 3 2
 
-\--------
-
-| O _ _ |
-
-| O X O |
-
-| X X X |
-
+\--------\
+| O _ _ |\
+| O X O |\
+| X X X |\
 \--------
 
 X wins
