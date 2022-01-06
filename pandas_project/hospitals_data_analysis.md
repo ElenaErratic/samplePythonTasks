@@ -6,9 +6,10 @@ A project with .csv data preparation, analysis, and visualization using `dropna(
 https://hyperskill.org/projects/152?track=10
 
 
-## Tasks:
+## Tasks
 
-Stages 1-3
+Stages 1-3:
+
 1. Read the CSV files with datasets.
 2. Change the column names. The column names of the sports and prenatal tables must match the column names of the general table.
 3. Merge the dataframes into one. Use the `ignore_index=True` parameter and the following order: `general`, `prenatal`, `sports`.
@@ -20,6 +21,7 @@ Stages 1-3
 9. Replace the NaN values in the `bmi`, `diagnosis`, `blood_test`, `ecg`, `ultrasound`, `mri`, `xray`, `children`, `months` columns with zeros.
    
 Stage 4:
+
 10. Answer the 1-5 questions using the pandas library methods. Output the answers on the separate lines in the format given in the Example section.
     1. Which hospital has the highest number of patients?
     2. What share of the patients in the general hospital suffers from stomach-related issues? Round the result to the third decimal place.
@@ -29,6 +31,7 @@ Stage 4:
        
 
 Stage 5:
+
 12. Answer questions 1-3. Output the answers in the specified format. The answers to the first two questions should be formatted as in the examples. No special form is required to answer the third question.
     1. What is the most common age of a patient among all hospitals? Plot a histogram and choose one of the following age ranges: 0-15, 15-35, 35-55, 55-70, or 70-80.
     2. What is the most common diagnosis among patients in all hospitals? Create a pie chart.
