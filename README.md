@@ -1,5 +1,7 @@
 Hi! Here I post my solutions to programming assignments in Python.
 
+- SQL solutions in Google Colab: [.ipynb](https://colab.research.google.com/drive/14oZCiIRjWrOH4wlraaLZyxInRcMze9hQ)
+
 - Pandas project: [task](pandas_project/hospitals_data_analysis.md), [solution](pandas_project/hospitals_data_analysis.py)
 
 - Simple Tic-Tac-Toe: [task](tic_tac_toe/tic_tac_toe.md), [solution](tic_tac_toe/tic_tac_toe.py)
