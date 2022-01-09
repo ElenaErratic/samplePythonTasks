@@ -2,6 +2,8 @@
 
 A project with .csv data preparation, analysis, and visualization using `dropna()`, `value_counts()`, `loc` with conditions, `pivot_table()`, `plot()`, and other pandas functions.
 
+[Solution](hospitals_data_analysis.py)
+
 
 https://hyperskill.org/projects/152?track=10
 

@@ -1,5 +1,7 @@
 Hi! Here I post my solutions to programming assignments in Python.
 
+- JSON analysis: [task](users_json_analysis/json_analysis.md), [solution](users_json_analysis/json_analysis.py)
+
 - SQL solutions in Google Colab: [.ipynb](https://colab.research.google.com/drive/14oZCiIRjWrOH4wlraaLZyxInRcMze9hQ)
 
 - Pandas project: [task](pandas_project/hospitals_data_analysis.md), [solution](pandas_project/hospitals_data_analysis.py)
