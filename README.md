@@ -1,6 +1,6 @@
 Hi! Here I post my solutions to programming assignments in Python.
 
-- JSON analysis: [task](users_json_analysis/json_analysis.md), [solution](users_json_analysis/json_analysis.py)
+- JSON analysis: [task](https://colab.research.google.com/drive/1YIjHLNkRGg6wLp5XyuMWO9WO3r4JibTD?usp=sharing), [solution](users_json_analysis/json_analysis.py)
 
 - SQL solutions in Google Colab: [.ipynb](https://colab.research.google.com/drive/14oZCiIRjWrOH4wlraaLZyxInRcMze9hQ)
 

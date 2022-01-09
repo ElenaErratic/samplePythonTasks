@@ -38,10 +38,8 @@ def extract_feature_lists(dict_name):
      ('G', 'M'), ('C', 'X'), ('M', 'U'), ('H', 'M'), ('M', 'V'), ('D', 'O'), ('X', 'Z'), ('C', 'O')]
     """
     common_property_sets = []  # common between a pair of users
-    all_user_ids = []  # may be unnecessary
     neighbor_id_pairs = []  # id pairs of users who have min 2 common properties >> to get the most popular users
     for user1 in dict_name:
-        all_user_ids.append(user1['id'])
         for user2 in dict_name:
 
             if user1 != user2:
@@ -154,12 +152,9 @@ class UserComparison:
                 most_similar_users.append(k)
  
             
-        print(most_similar_users)
+        # print(most_similar_users)
         return most_similar_users  # todo check
 
 query_user_prop = ['F', 'G', 'M']
 users_dict_inst = UserComparison(users_dict)
 users_dict_inst.find_friends(query_user_prop)
-
-
-
