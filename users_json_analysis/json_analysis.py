@@ -108,9 +108,12 @@ def find_popular_users(list_name):
     # print(popular_users)
     popular_users_number = len(popular_users)
     print(f"popular_users_number: {popular_users_number}")
-    # answer 3.1 = 1088
-    # (=all users from neighbor_candidates except id 4513 (5 occ) because the list includes only users that have pairs)
-    # 4316: 6, 2536: 6, 4513: 5 - bottom
+    '''answer 3.1 = 1088
+    (popular_users has 1088 users, which equals len(neighbor_candidates) - 1: as a result of pre-filtering, 
+    neighbor_candidates does not include users without a neighbor. in fact all users except id 4513 
+    have >= 6 neighbors (MEASURE)
+    Proof: bottom of popular_users [... 4316: 6, 2536: 6, 4513: 5]
+    ''' 
 
     return popular_users_number
 
