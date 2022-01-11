@@ -4,9 +4,7 @@ import json
 
 # f = open("C:/Users/Elena.Tikhomirova/Downloads/users.json")
 f = open("users_json_analysis/datasets/users.json")
-users_dict = json.load(f)
-
-# print(json.dumps(users_dict, indent=4, sort_keys=True))
+users_json = json.load(f)
 
 # min number of properties in a set per user. Used for filtering users.
 NUMBER = 2
@@ -14,23 +12,23 @@ NUMBER = 2
 MEASURE = 6
 
 
-def filter_json(dict_name):
+def filter_json(json_name):
     """Shorten the list of eligible users 10 times (10100 > 1089).
     Example result: neighbor_candidates = [{'properties': ['D', 'C'], 'id': 1}, {'properties': ['Y', 'A'], 'id': 2},
     {'properties': ['O', 'U', 'I', 'C'], 'id': 48}]"""
 
     neighbor_candidates = []
-    for user in dict_name:
+    for user in json_name:
         if len(user['properties']) >= NUMBER:
             neighbor_candidates.append(user)
     # print(len(neighbor_candidates))
     return neighbor_candidates
 
 
-def extract_feature_lists(dict_name):
+def extract_feature_lists(json_name):
     """
     Prepare lists for further analysis.
-    :param: dict_name is a reduced JSON with only users that have 2 or more properties.
+    :param: json_name is a reduced JSON with only users that have 2 or more properties.
     :return:
     1. neighbor_id_pairs [1, 2, 3, 7]
     2. common_property_sets: common properties per all user pairs.
@@ -39,8 +37,8 @@ def extract_feature_lists(dict_name):
     """
     common_property_sets = []  # common between a pair of users
     neighbor_id_pairs = []  # id pairs of users who have min 2 common properties >> to get the most popular users
-    for user1 in dict_name:
-        for user2 in dict_name:
+    for user1 in json_name:
+        for user2 in json_name:
 
             if user1 != user2:
 
@@ -117,16 +115,16 @@ def find_popular_users(list_name):
     return popular_users_number
 
 
-neighbor_candidates = filter_json(users_dict)
+neighbor_candidates = filter_json(users_json)
 neighbor_id_pairs, common_property_sets = extract_feature_lists(neighbor_candidates)
 most_common_pair = rank_prop_pairs(common_property_sets)
 popular_users_number = find_popular_users(neighbor_id_pairs)
 
 
 # task 4
-class UserComparison:
-    def __init__(self, dict_name):
-        self.dict_name = dict_name
+class User:
+    def __init__(self, json_name):
+        self.json_name = json_name
 
 
     def find_friends(self, query_user_prop):
@@ -135,7 +133,7 @@ class UserComparison:
         :return: ids of  7  most similar users sorted by similarity desc. similarity > 0. or returns []"""
 
         friends = {}
-        for user1 in self.dict_name:
+        for user1 in self.json_name:
 
             user1_prop = set(user1['properties'])
             user2_prop = set(query_user_prop)
@@ -156,5 +154,5 @@ class UserComparison:
         return most_similar_users  # todo check
 
 query_user_prop = ['F', 'G', 'M']
-users_dict_inst = UserComparison(users_dict)
-users_dict_inst.find_friends(query_user_prop)
+user_instance = User(users_json)
+user_instance.find_friends(query_user_prop)
