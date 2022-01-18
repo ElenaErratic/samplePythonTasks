@@ -1,5 +1,7 @@
 Hi! Here I post my solutions to programming assignments in Python.
 
+- Linear regression: [solution](linear_regression/regression.py)
+
 - JSON analysis: [.ipynb](https://colab.research.google.com/drive/1YIjHLNkRGg6wLp5XyuMWO9WO3r4JibTD?usp=sharing), [.py](users_json_analysis/json_analysis.py)
 
 - SQL solutions in Google Colab: [.ipynb](https://colab.research.google.com/drive/14oZCiIRjWrOH4wlraaLZyxInRcMze9hQ)
