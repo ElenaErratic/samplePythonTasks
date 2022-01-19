@@ -1,18 +1,25 @@
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
 
 """
-Stage 3/4: Multiple linear regression: intercept and 
-coefficient(s) predictions and metrics (R^2 and RMSE).
-
+Stage 4/4: Multiple linear regression: comparing the 'hand-made' model and
+sklearn LinearRegression.
 """
 
-df = pd.DataFrame({'y': [21.95, 27.18, 16.9, 15.37, 16.03, 18.15, 14.22, 18.72, 15.4, 14.69],
-                   'x': [11, 11, 9, 8, 7, 7, 6, 5, 5, 4],
-                   'w': [0.9, 0.5, 1.75, 2.0, 1.4, 1.5, 3.0, 1.1, 2.6, 1.9]})
 
+df = pd.read_csv("data/data_stage4.csv")
+X = df[['f1', 'f2', 'f3']]
+y = df['y']
+
+def custom_rmse(y, yhat):
+    return np.sqrt(np.mean((y - yhat) ** 2))
+
+
+def custom_r2_score(y, yhat):
+    return 1 - np.sum((y - yhat) ** 2) / np.sum((y - np.mean(y)) ** 2)
 
 class CustomLinearRegression:
 
@@ -31,18 +38,27 @@ class CustomLinearRegression:
             res = np.linalg.inv(X.T @ X) @ X.T @ y
             # print(res[1:])
             self.intercept = res[0]
-            self.coefficient = res[2:0:-1]
+            self.coefficient = res[1:]
             yhat = np.array(X @ res)
-            self.RMSE = np.sqrt(mean_squared_error(y, yhat))
-            self.R2 = r2_score(y, yhat)
-            dict = {'Intercept': self.intercept,
-                    'Coefficient': self.coefficient,
-                    'R2': self.R2,
-                    'RMSE': self.RMSE}
-            print(dict)
+            self.RMSE = custom_rmse(y, yhat)
+            self.R2 = custom_r2_score(y, yhat)
         else:
             self.coefficient = np.linalg.inv(X.T @ X) @ X.T @ y
         return None
 
 regCustom = CustomLinearRegression(fit_intercept=True)
-regCustom.fit(df[['x', 'w']], df['y'])
+regCustom.fit(df[['f1', 'f2', 'f3']], df['y'])
+
+regSci = LinearRegression(fit_intercept=True)
+regSci.fit(X, y)
+Y_predict = regSci.predict(X)
+
+
+i = np.float64(regSci.intercept_ - regCustom.intercept)
+c = (regSci.coef_ - regCustom.coefficient).astype(float)
+r = np.longdouble(r2_score(y, Y_predict) - regCustom.R2)
+rm = (np.sqrt(mean_squared_error(y, Y_predict)) - regCustom.RMSE)
+
+print(f"{{'Intercept': {i}, 'Coefficient': {c}, 'R2': {r}, 'RMSE': {rm}}}")
+# currently there's the float subtraction problem, so visual comparing the value
+# pairs works better than subracting them
