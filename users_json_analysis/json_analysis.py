@@ -2,7 +2,6 @@ from collections import Counter
 import json
 
 
-# f = open("C:/Users/Elena.Tikhomirova/Downloads/users.json")
 f = open("users_json_analysis/datasets/users.json")
 users_json = json.load(f)
 
@@ -21,7 +20,6 @@ def filter_json(json_name):
     for user in json_name:
         if len(user['properties']) >= NUMBER:
             neighbor_candidates.append(user)
-    # print(len(neighbor_candidates))
     return neighbor_candidates
 
 
@@ -35,6 +33,7 @@ def extract_feature_lists(json_name):
     [('C', 'O'), ('I', 'U'), ('X', 'Z'), ('J', 'X'), ('M', 'U'), ('M', 'V'),
      ('G', 'M'), ('C', 'X'), ('M', 'U'), ('H', 'M'), ('M', 'V'), ('D', 'O'), ('X', 'Z'), ('C', 'O')]
     """
+    
     common_property_sets = []  # common between a pair of users
     neighbor_id_pairs = []  # id pairs of users who have min 2 common properties >> to get the most popular users
     for user1 in json_name:
@@ -45,12 +44,9 @@ def extract_feature_lists(json_name):
                 # take only users that have at least 2 properties in common
                 user1_prop = set(user1['properties'])
                 user2_prop = set(user2['properties'])
-                # print(user1_prop)
-                # print(user2_prop)
                 intersecting_props = list(user1_prop.intersection(user2_prop))
-                # print(f"intersection {intersecting_props}, {len(intersecting_props)}")
                 if len(intersecting_props) >= NUMBER:
-                    neighbor_id_pairs.append(user1['id'])  # can append both items at once to get a nested []
+                    neighbor_id_pairs.append(user1['id'])
                     neighbor_id_pairs.append(user2['id'])
 
                     '''Iterate to get pairs from intersecting sets and sort items in the resulting pairs
@@ -60,15 +56,10 @@ def extract_feature_lists(json_name):
                                       for b in intersecting_props[idx + 1:]]
 
                     common_property_sets.append(property_pairs)
-                    # print(f"common_property_sets = {common_property_sets}")
-                    # print(f"neighbor_id_pairs = {neighbor_id_pairs}")
 
     # flatten the list from nesting_level = 2 to 1
     common_property_sets = [item for sublist in common_property_sets for item in sublist]
-
-    # print(f"final common_property_sets = {common_property_sets}")
     # todo: deduplicate common_property_sets and neighbor_id_pairs
-    # todo remove print's
 
     return neighbor_id_pairs, common_property_sets
 
@@ -84,8 +75,6 @@ def rank_prop_pairs(list_name):
     # Now the input list is duplicated, therefore // 2
     most_common_pair, num_most_common = Counter(list_name).most_common(1)[0]
     # most_common_pair = ','.join(map(str, most_common_pair))  # G,M
-    # num_most_common //= 2
-    print(f"most_common_pair: {most_common_pair}")
     # answer 3.2 ('G', 'M')
     return most_common_pair
 
@@ -97,15 +86,12 @@ def find_popular_users(list_name):
     :param: list_name = neighbor_id_pairs
     :return: the number of users that have > 5 matches.
     `.count(x) // 2` because the list is duplicated
+    popular_users example: [[2225, 66], [4274, 34]] format: [[user_id, matches]]
     """
-
-    # popular_users example: [[2225, 66], [4274, 34]] format: [[user_id, matches]]
 
     popular_users = [[x, list_name.count(x) // 2]
                      for x in set(list_name)
                      if list_name.count(x) // 2 >= MEASURE]
-    # alt = Counter(list_name)
-    # print(popular_users)
     popular_users_number = len(popular_users)
     print(f"popular_users_number: {popular_users_number}")
     '''answer 3.1 = 1088
@@ -129,7 +115,6 @@ class User:
     def __init__(self, json_name):
         self.json_name = json_name
 
-
     def find_friends(self, query_user_prop):
         """
         :param: ['Y', 'E', 'S']
@@ -151,11 +136,10 @@ class User:
             user_ids_with_similarity = Counter(friends).most_common(7)  # a list of tuples
             for k, v in user_ids_with_similarity:
                 most_similar_users.append(k)
- 
-            
-        # print(most_similar_users)
+
         return most_similar_users  # todo check
 
+    
 query_user_prop = ['F', 'G', 'M']
 user_instance = User(users_json)
 user_instance.find_friends(query_user_prop)
