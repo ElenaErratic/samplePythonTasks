@@ -46,12 +46,10 @@ max_hospital = ah.loc[ah.blood_test == 't'].hospital.value_counts().idxmax()
 n = ah.loc[ah.blood_test == 't'].hospital.value_counts().max()
 answer_five = f'{max_hospital}, {n} blood tests'
 
-
 message = 'The answer to the {} question is'
 dictionary = {'1st': answer_one, '2nd': answer_two, '3rd': answer_three, '4th': answer_four, '5th': answer_five}
 for key, value in dictionary.items():
     print(f'{message} {value}'.format(key))
-
 
 # Stage 5
 bins_list = [0, 15, 35, 55, 70, 80]
@@ -61,7 +59,6 @@ ah['diagnosis'].value_counts().plot(kind='pie', subplots=True)
 plt.show()
 
 # https://towardsdatascience.com/violin-plots-explained-fb1d115e023d
-
 def plot_comparison(x, title):
     fig, ax = plt.subplots(3, 1, sharex=True)
     sns.distplot(x, ax=ax[0])

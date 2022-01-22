@@ -15,21 +15,17 @@ def calculate():
       x = M
     if y == 'M':
       y = M
-    
     try:
       x = float(x)
       y = float(y)
     except ValueError:
      	print("Do you even know what numbers are? Stay focused!")
-    
     else:
-    	
       if oper not in ('+', '-', '*', '/'):
         print("Yes ... an interesting math operation. You've slept through all classes, haven't you?")
       elif oper == "/" and y == 0:
         check(x, y, oper)
         print("Yeah... division by zero. Smart move...")
-
       else:
         check(x, y, oper)
         if oper == "+":
@@ -44,7 +40,6 @@ def calculate():
         elif oper == "/" and y != 0:
           result = x / y
           print(result)
-        
         while True:
           print("Do you want to store the result? (y / n):")
           if input() == 'y':
@@ -60,7 +55,6 @@ def calculate():
             elif is_one_digit(result) == False:  
               M = result
               break
-              
           elif input() == 'n':
             break
   
@@ -71,10 +65,8 @@ def calculate():
             break
           elif answer_continue == 'n':
             break
-  
         if answer_continue == 'n':
-          break    
-
+          break
         if oper == "/" and y == 0:
           print("Yeah... division by zero. Smart move...")
           
@@ -87,7 +79,6 @@ def check(x, y, oper):
   msg_9 = "You are"
   if is_one_digit(x) == True and is_one_digit(y) == True:
     msg += msg_6
-  
   if (x == 1 or y == 1) and oper =="*":
     msg += msg_7
   if (x == 0 or y == 0) and (oper =="*" or oper =="+" or oper =="-"):
@@ -102,7 +93,6 @@ def is_one_digit(v):
     return True
   else:
     return False
-  
 
 
 calculate()

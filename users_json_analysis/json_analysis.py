@@ -14,8 +14,8 @@ MEASURE = 6
 def filter_json(json_name):
     """Shorten the list of eligible users 10 times (10100 > 1089).
     Example result: neighbor_candidates = [{'properties': ['D', 'C'], 'id': 1}, {'properties': ['Y', 'A'], 'id': 2},
-    {'properties': ['O', 'U', 'I', 'C'], 'id': 48}]"""
-
+    {'properties': ['O', 'U', 'I', 'C'], 'id': 48}]
+    """
     neighbor_candidates = []
     for user in json_name:
         if len(user['properties']) >= NUMBER:
@@ -33,14 +33,11 @@ def extract_feature_lists(json_name):
     [('C', 'O'), ('I', 'U'), ('X', 'Z'), ('J', 'X'), ('M', 'U'), ('M', 'V'),
      ('G', 'M'), ('C', 'X'), ('M', 'U'), ('H', 'M'), ('M', 'V'), ('D', 'O'), ('X', 'Z'), ('C', 'O')]
     """
-    
     common_property_sets = []  # common between a pair of users
     neighbor_id_pairs = []  # id pairs of users who have min 2 common properties >> to get the most popular users
     for user1 in json_name:
         for user2 in json_name:
-
             if user1 != user2:
-
                 # take only users that have at least 2 properties in common
                 user1_prop = set(user1['properties'])
                 user2_prop = set(user2['properties'])
@@ -54,7 +51,6 @@ def extract_feature_lists(json_name):
                      required alphabetical order.'''
                     property_pairs = [(a, b) if a < b else (b, a) for idx, a in enumerate(intersecting_props)
                                       for b in intersecting_props[idx + 1:]]
-
                     common_property_sets.append(property_pairs)
 
     # flatten the list from nesting_level = 2 to 1
@@ -71,7 +67,6 @@ def rank_prop_pairs(list_name):
     :return: Return the most popular pair of values from all input sublists.
     Example: ('Y', 'A') > 'Y', 'A'
     """
-
     # Now the input list is duplicated, therefore // 2
     most_common_pair, num_most_common = Counter(list_name).most_common(1)[0]
     # most_common_pair = ','.join(map(str, most_common_pair))  # G,M
@@ -88,7 +83,6 @@ def find_popular_users(list_name):
     `.count(x) // 2` because the list is duplicated
     popular_users example: [[2225, 66], [4274, 34]] format: [[user_id, matches]]
     """
-
     popular_users = [[x, list_name.count(x) // 2]
                      for x in set(list_name)
                      if list_name.count(x) // 2 >= MEASURE]
@@ -122,12 +116,9 @@ class User:
 
         friends = {}
         for user1 in self.json_name:
-
             user1_prop = set(user1['properties'])
             user2_prop = set(query_user_prop)
             similarity = len(user1_prop.intersection(user2_prop)) / len(user1_prop.union(user2_prop))
-
-
             if similarity > 0:
                 friends.update({user1['id']: similarity})
 

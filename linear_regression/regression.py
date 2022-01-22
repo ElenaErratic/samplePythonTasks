@@ -1,13 +1,11 @@
-import numpy as np
-import pandas as pd
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
-
-
 """
 Stage 4/4: Multiple linear regression: comparing the 'hand-made' model and
 sklearn LinearRegression.
 """
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
 
 
 df = pd.read_csv("data/data_stage4.csv")
@@ -21,8 +19,8 @@ def custom_rmse(y, yhat):
 def custom_r2_score(y, yhat):
     return 1 - np.sum((y - yhat) ** 2) / np.sum((y - np.mean(y)) ** 2)
 
-class CustomLinearRegression:
 
+class CustomLinearRegression:
     def __init__(self, *, fit_intercept=True):
 
         self.fit_intercept = fit_intercept

@@ -7,18 +7,14 @@ def print_board(board):
 
 def evaluate(board): 
   while True:
-
     global O_wins
     global X_wins
     global draw
     draw = False
-    
     if '_' not in board:
       blank = 0
     else:
       blank = 1
-
-    
     if ((board[0] == 'X' and board[1] == 'X' and board[2] == 'X')
       or (board[3] == 'X' and board[4] == 'X' and board[5] == 'X')
       or (board[6] == 'X' and board[7] == 'X' and board[8] == 'X')
@@ -42,13 +38,11 @@ def evaluate(board):
       O_wins = True
     else:
       O_wins = False
-
     
     if X_wins == False and O_wins == False and blank == 0:
       draw = True
       print("Draw")
       return draw
-  
     if X_wins == True:
       print("X wins")
     if O_wins == True:
@@ -66,7 +60,6 @@ def overwrite(i):
       board[i] = "O"
     print_board(board)
     move += 1
-    
   else:
     print("This cell is occupied! Choose another one!")
 
@@ -112,7 +105,6 @@ board = initial_board
 print_board(board)
 
 move = 0
-
 while True:
   coordinates = input('Enter the coordinates: ').split()
   try:
