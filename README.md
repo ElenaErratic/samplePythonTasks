@@ -1,12 +1,14 @@
-# Python Solutions
+# Python and SQL Code Snippets
 
-Hi! Here I post my solutions to programming assignments in Python.
+Hi! Here I post my solutions to programming assignments in Python and SQL queries (anonymized work examples).
 
 ## Data analysis
 
 - JSON analysis: [.ipynb](https://colab.research.google.com/drive/1YIjHLNkRGg6wLp5XyuMWO9WO3r4JibTD?usp=sharing), [.py](users_json_analysis/json_analysis.py)
 
 - SQL solutions in Google Colab: [.ipynb](https://colab.research.google.com/drive/14oZCiIRjWrOH4wlraaLZyxInRcMze9hQ)
+
+- SQL queries: [examples](sql_queries)
 
 ## ML and NLP
 
