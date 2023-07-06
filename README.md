@@ -6,9 +6,9 @@ Hi! Here I post my solutions to programming assignments in Python and SQL querie
 
 - JSON analysis using Python: [.ipynb](https://colab.research.google.com/drive/1YIjHLNkRGg6wLp5XyuMWO9WO3r4JibTD?usp=sharing), [.py](users_json_analysis/json_analysis.py)
 
-- SQL solutions in Google Colab: [.ipynb](https://colab.research.google.com/drive/14oZCiIRjWrOH4wlraaLZyxInRcMze9hQ)
+- SQL solutions for sales data in Google Colab: [.ipynb](https://colab.research.google.com/drive/14oZCiIRjWrOH4wlraaLZyxInRcMze9hQ)
 
-- SQL queries: [examples](sql_queries)
+- SQL queries for a big DWH in banking: [examples](sql_queries)
 
 ## Python for ML and NLP
 
