@@ -4,13 +4,13 @@ Hi! Here I post my solutions to programming assignments in Python and SQL querie
 
 ## Data analysis
 
-- JSON analysis: [.ipynb](https://colab.research.google.com/drive/1YIjHLNkRGg6wLp5XyuMWO9WO3r4JibTD?usp=sharing), [.py](users_json_analysis/json_analysis.py)
+- JSON analysis using Python: [.ipynb](https://colab.research.google.com/drive/1YIjHLNkRGg6wLp5XyuMWO9WO3r4JibTD?usp=sharing), [.py](users_json_analysis/json_analysis.py)
 
 - SQL solutions in Google Colab: [.ipynb](https://colab.research.google.com/drive/14oZCiIRjWrOH4wlraaLZyxInRcMze9hQ)
 
 - SQL queries: [examples](sql_queries)
 
-## ML and NLP
+## Python for ML and NLP
 
 - Linear regression project: [solution](linear_regression/regression.py)
 
@@ -22,7 +22,7 @@ Hi! Here I post my solutions to programming assignments in Python and SQL querie
 
 - Logistic regression (sklearn): [solutions](sklearn_logistic_regression)
 
-## Simple programs
+## Simple Python programs
 
 - Simple Tic-Tac-Toe: [task](tic_tac_toe/tic_tac_toe.md), [solution](tic_tac_toe/tic_tac_toe.py)
 
