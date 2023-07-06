@@ -1,14 +1,21 @@
-/*Count occurrences of error types per month across different assets.
-The error messages have no delimiters, may contain several occurrences of different error types or the same error type. Example:
+/*TASK: Count the occurrences of all error types per month across different asset classes (types of traded objects).
+The incoming error messages have no delimiters, may contain several occurrences of different error types or the same error type. Example:
 "org.xml.sax.SAXParseException; lineNumber 63; columnNumber: 46; cvc-complex-type.2.4.a: Invalid content was found starting with element ''. One of '{}' is expected.
 org.xml.sax.SAXParseException; lineNumber 64; columnNumber: 47; cvc-complex-type.2.4.b: The content of element '' is not complete. One of '{}' is expected."
 
-Result:
+The procedure 
+	per each asset class
+	1) extract XSD error descriptions, 
+	2) match them with manually verified descriptions and count the occurrences,
+	for all asset classes
+	3) aggregate the results per each asset class in one uniform report.
+
+Report:
 Asset Class			Date 		Month 	XSD Error		Number or errors
 Bonds				2022-06 	June	....			26
-Bonds				2022-05		May		....			15
+Bonds				2022-05		May	....			15
 ...
-Listed Derivatives	2022-06		June	....			55
+Listed Derivatives		2022-06		June	....			55
 ....
 */
 
@@ -50,11 +57,11 @@ SELECT 'Listed Derivatives' AS "Asset Class"
 	, TO_CHAR(err.LOAD_DATE_D, 'YYYY-MM') AS "Date"
 	, TO_CHAR(err.LOAD_DATE_D, 'Month') AS "Month"
 	, CASE WHEN err.SUBSTRINGS LIKE '%cvc-complex-type2.4.b.%' THEN 'cvc-complex-type.2.4.b. The content of element is not complete'
-		WHEN err.SUBSTRINGS LIKE '%cvc-complex-type2.4.a.%' THEN 'cvc-complex-type.2.4.a. Invalid content was found starting with element' -- ....
+		WHEN err.SUBSTRINGS LIKE '%cvc-complex-type2.4.a.%' THEN 'cvc-complex-type.2.4.a. Invalid content was found starting with element' 
+		-- ....
 		ELSE 'Other' END AS "XSD Error"
 	, COUNT(err.SUBSTRINGS) AS "Number of errors"
 		
-	
 FROM ld_errors err
 WHERE LENGTH(err.SUBSTRINGS > 1)
 GROUP BY 
@@ -62,7 +69,8 @@ GROUP BY
 	, TO_CHAR(err.LOAD_DATE_D, 'YYYY-MM')
 	, TO_CHAR(err.LOAD_DATE_D, 'Month')
 	, CASE WHEN err.SUBSTRINGS LIKE '%cvc-complex-type2.4.b.%' THEN 'cvc-complex-type.2.4.b. The content of element is not complete'
-		WHEN err.SUBSTRINGS LIKE '%cvc-complex-type2.4.a.%' THEN 'cvc-complex-type.2.4.a. Invalid content was found starting with element' -- ....
+		WHEN err.SUBSTRINGS LIKE '%cvc-complex-type2.4.a.%' THEN 'cvc-complex-type.2.4.a. Invalid content was found starting with element' 
+		-- ....
 		ELSE 'Other' END 
 ),
 
