@@ -1,4 +1,5 @@
-/*Test the results using, e.g., https://www.db-fiddle.com/ SQLite v3.39	*/
+/* A number of tricky SQL tasks with sample datasets to test the solution.
+Test the results using, e.g., https://www.db-fiddle.com/ SQLite v3.39	*/
 
 ------Determine the client who has the highest-paying order.
 create table orders(id int, client_id int, order_dt date, order_sum int);
