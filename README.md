@@ -8,7 +8,7 @@ Hi! Here I post my solutions to programming assignments in Python and SQL querie
 
 - SQL solutions for sales data in Google Colab: [.ipynb](https://colab.research.google.com/drive/14oZCiIRjWrOH4wlraaLZyxInRcMze9hQ)
 
-- SQL queries for a big DWH in banking: [examples](sql_queries)
+- SQL queries: [examples](sql_queries)
 
 ## Python for ML and NLP
 
