@@ -52,3 +52,17 @@ def logs():
 #3. logdata="""'146.204.224.152 - feest6811 [21/Jun/2019:15:45:24 -0700] "POST /incentivize HTTP/1.1" 302 4622\n197.109.77.178 - kertzmann3129 [21/Jun/2019:15:45:25 -0700] "DELETE /virtual/solutions/target/web+services HTTP/2.0" 203 26554\n156.127.178.177 - okuneva5222 [21/Jun/2019:15:45:27 -0700] "DELETE /interactive/transparent/niches/revolutionize HTTP/1.1" 416 14701\n100.32.205.59 - ortiz8891 [21/Jun/2019:15:45:28 -0700] "PATCH /architectures HTTP/1.0" 204 6048\n168.95.156.240 - stark2413 [21/Jun/2019:15:45:31 -0700] "GET /engage HTTP/2.0" 201 9645\n71.172.239.195 - dooley1853 [21/Jun/2019:15:45:32 -0700] "PUT /cutting-edge HTTP/2.0" 406 24498\n180.95.121.94 - mohr6893 [21/Jun/2019:15:45:34 -0700] "PATCH /extensible/reinvent HTTP/1.1" 201 27330\n144.23.247.108 - auer7552 [21/Jun/2019:15:45:35 -0700] "POST /extensible/infrastructures/one-to-one/enterprise HTTP/1.1" 100 22921\n2.179.103.97 - lind8584 [21/Jun/2019:15:45:36 -0700] "POST /grow/front-end/e-commerce/robust HTTP/2.0" 304 14641\n241.114.184.133 - tromp8355 [21/Jun/2019:15:45:37 -0700] "GET /redefine/orchestrate HTTP/1.0" 204 29059\n224.188.38.4 - keebler1423 [21/Jun/2019:15:45:40 -0700] "PUT /orchestrate/out-of-the-box/unleash/syndicate HTTP/1.1" 404 28211\n94.11.36.112 - klein8508 [21/Jun/2019:15:45:41 -0700] "POST /enhance/solutions/bricks-and-clicks HTTP/1.1" 404 24768\n126.196.238.197 - gusikowski9864 [21/Jun/2019:15:45:45 -0700] "DELETE /rich/reinvent HTTP/2.0" 405 7894\n103.247.168.212 - medhurst2732 [21/Jun/2019:15:45:49 -0700] "HEAD /scale/global/leverage HTTP/1.0" 203 15844\n57.86.153.68 - dubuque8645 [21/Jun/2019:15:45:50 -0700] "POST /innovative/roi/robust/systems HTTP/1.1" 406 29046\n231.220.8.214 - luettgen1860 [21/Jun/2019:15:45:52 -0700] "HEAD /systems/sexy HTTP/1.1" 201 2578\n
 """
 
+
+#4.
+"""Consider a string s. Find all characters (other than A) which are followed by triple A, i.e., have AAA to the right. 
+Do not include the triple A in the output, only the character immediately preceding AAA.
+"""
+def result():
+    s = 'ACAABAACAAABACDBADDDFSDDDFFSSSASDAFAAACBAAAFASD'
+
+    result = []
+    pattern = "([^A])(AAA)"
+    for item in re.finditer(pattern, s):
+    	# The searched group number is 1. 2 is for AAA, 0 for all groups.
+	result.append(item.group(1))      
+    return result
