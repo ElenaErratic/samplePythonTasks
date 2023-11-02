@@ -3,11 +3,11 @@ Test the results using, e.g., https://www.db-fiddle.com/ SQLite v3.39	*/
 
 ------Determine the client who has the highest-paying order.
 create table orders(id int, client_id int, order_dt date, order_sum int);
-insert into orders values(1, 2, '2022-01-01', 1000);
-insert into orders values(2, 2, '2022-01-02', 10000);
-insert into orders values(3, 1, '2022-01-03', 1000);
-insert into orders values(4, 3, '2022-01-04', 500);
-insert into orders values(5, 4, '2022-01-05', 1500);
+insert into orders values(1, 2, '2022-01-01', 1000),
+	(2, 2, '2022-01-02', 10000),
+	(3, 1, '2022-01-03', 1000),
+	(4, 3, '2022-01-04', 500),
+	(5, 4, '2022-01-05', 1500);
 
 select client_id
 from orders
@@ -17,22 +17,24 @@ where order_sum >= (select max(order_sum) from orders);
 -------Find the clients whose average monthly payment is more than 10000 and who have at least 5 payments that
 --exceed 5000.
 create table CLIENTS(client int, product text, payment int); -- Oracle: string
-insert into CLIENTS values(1, 'Кредит1', 10000);
-insert into CLIENTS values(1, 'Кредит2', 7000);
-insert into CLIENTS values(1, 'Карта1', 6000);
-insert into CLIENTS values(1, 'Ипотека1', 50000);
-insert into CLIENTS values(1, 'Кредит3', 5500);
-insert into CLIENTS values(1, 'Кредит4', 5600);
-insert into CLIENTS values(1, 'Кредит5', 2000);
-insert into CLIENTS values(2, 'Кредит1', 20000);
-insert into CLIENTS values(2, 'Кредит2', 20000);
-insert into CLIENTS values(3, 'Кредит1', 10000);
-insert into CLIENTS values(3, 'Кредит2', 7000);
-insert into CLIENTS values(3, 'Карта1', 6000);
-insert into CLIENTS values(3, 'Кредит3', 5500);
-insert into CLIENTS values(3, 'Кредит4', 5600);
-insert into CLIENTS values(3, 'Кредит5', 6000);
---insert into CLIENTS values(3, 'Ипотека1', 50000);
+insert into CLIENTS values(1, 'Кредит1', 10000),
+(1, 'Кредит2', 7000),
+(1, 'Карта1', 6000),
+(1, 'Ипотека1', 50000),
+(1, 'Кредит3', 5500),
+(1, 'Кредит4', 5600),
+(2, 'Кредит1', 20000),
+(2, 'Кредит2', 20000),
+
+(3, 'Кредит1', 10000),
+(3, 'Кредит2', 7000),
+(3, 'Карта1', 6000),
+(3, 'Кредит3', 5500),
+(3, 'Кредит4', 5600),
+(3, 'Кредит5', 6000)	
+--(3, 'Ипотека1', 50000)
+;
+
 
 --first solution
 select client
@@ -70,15 +72,15 @@ having count(c.payment) > 5 and avg(cc.payment) > 10000;
 
 ------Calculate the daily running total (balance).
 create table OPERATIONS(oper_dt date, value int);
-insert into OPERATIONS values('2022-01-01', 1000);
-insert into OPERATIONS values('2022-01-02', 1000);
-insert into OPERATIONS values('2022-01-03', 1000);
-insert into OPERATIONS values('2022-01-04', -500);
-insert into OPERATIONS values('2022-01-05', -500);
+insert into OPERATIONS values('2022-01-01', 1000),
+	('2022-01-02', 1000),
+	('2022-01-03', 1000),
+	('2022-01-04', -500),
+	('2022-01-05', -500);
 
 --first solution
 select oper_dt, value,
-	sum(value) over (order by oper_dt ROWS UNBOUNDED PRECEDING) as balance
+	sum(value) over (order by oper_dt) as balance -- (order by oper_dt ROWS UNBOUNDED PRECEDING)
 from OPERATIONS;
 
 --second solution
@@ -90,16 +92,12 @@ group by o.oper_dt, o.value;
 
 
 ------Count the sum of all positive and the sum of all negative numbers in a column.
-WITH buckets AS
-(
-select case when value > 0
-			then value end as positive_numbers
-	   , case when value < 0
-       		then value end as negative_numbers
-from OPERATIONS
-)
-select sum(positive_numbers), sum(negative_numbers)
-from buckets;
+select sum (case when value > 0
+			then value end) as positive_numbers
+	   , sum (case when value < 0 
+       		then value end) as negative_numbers
+		
+from OPERATIONS;
 
 /*
 Задание "Средняя зп по больнице"
