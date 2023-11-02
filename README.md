@@ -1,22 +1,28 @@
 # Python and SQL Code Snippets
 
-Hi! Here I post my solutions to programming assignments in Python and SQL queries (anonymized work examples).
+Hi! Here I post my solutions to programming assignments in Python and SQL.
 
 ## Data analysis
 
-- JSON analysis using Python: [.ipynb](https://colab.research.google.com/drive/1YIjHLNkRGg6wLp5XyuMWO9WO3r4JibTD?usp=sharing), [.py](users_json_analysis/json_analysis.py)
+- Python
 
-- Text parsing using regex in Python: [regex](regex.py)
+    - Country ranking &mdash; preprocessing datasets (.csv, .xls) and finding correlations: [.ipynb](https://colab.research.google.com/drive/1lMGBEE-OIgrsuPsc7SNSapV7vp4QEqcQ?usp=sharing)
 
-- SQL analysis of sales data in Google Colab: [.ipynb](https://colab.research.google.com/drive/14oZCiIRjWrOH4wlraaLZyxInRcMze9hQ)
+    - User properties analysis (.json): [.ipynb](https://colab.research.google.com/drive/1YIjHLNkRGg6wLp5XyuMWO9WO3r4JibTD?usp=sharing), [.py](users_json_analysis/json_analysis.py)
 
-- Complex SQL queries: [examples](sql_queries)
+    - Text parsing using regex: [regex](regex.py)
+
+- SQL
+
+    - Analysis of sales data: [.ipynb](https://colab.research.google.com/drive/14oZCiIRjWrOH4wlraaLZyxInRcMze9hQ)
+
+    - Complex SQL queries: [examples](sql_queries)
 
 ## Python for ML and NLP
 
 - Linear regression project: [solution](linear_regression/regression.py)
 
-- Pandas project: [task](pandas_project/hospitals_data_analysis.md), [solution](pandas_project/hospitals_data_analysis.py)
+- Patient data analysis and result visualization (pandas, seaborn, matplotlib): [task](pandas_project/hospitals_data_analysis.md), [solution](pandas_project/hospitals_data_analysis.py)
 
 - Random forest (sklearn): [solution](sklearn_random_forest/random_forest_oob_score.py)
 
