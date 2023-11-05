@@ -70,6 +70,24 @@ group by cc.client
 having count(c.payment) > 5 and avg(cc.payment) > 10000;
 
 
+
+------Select the maximum monthly payment per client and specify the product.
+WITH max_p AS
+(
+select client, max(payment) as payment
+from CLIENTS
+group by client
+)
+                 
+select c.client, c.product, c.payment
+from CLIENTS c
+join max_p m
+	on m.client=c.client
+	and m.payment=c.payment;
+
+
+
+
 ------Calculate the daily running total (balance).
 create table OPERATIONS(oper_dt date, value int);
 insert into OPERATIONS values('2022-01-01', 1000),
