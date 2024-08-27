@@ -35,40 +35,12 @@ insert into CLIENTS values(1, 'Кредит1', 10000),
 --(3, 'Ипотека1', 50000)
 ;
 
-
---first solution
+--Solution
 select client
 from CLIENTS
 where payment > 5000
 group by client
-having count(payment) > 5
-INTERSECT
-select client
-from CLIENTS
-group by client
-having avg(payment) > 10000;
-
---second solution
-select client
-from CLIENTS
-where client in  (
-      select client
-      from CLIENTS
-      where payment > 5000
-      group by client
-      having count(payment) > 5)
-group by client
-having avg(payment) > 10000;
-
---third solution
-select cc.client
-from CLIENTS c
-right join CLIENTS cc
-on c.client = cc.client and c.product = cc.product
-and c.payment > 5000
-group by cc.client
-having count(c.payment) > 5 and avg(cc.payment) > 10000;
-
+having count(payment) > 5  and avg(payment) > 10000;
 
 
 ------Select the maximum monthly payment per client and specify the product.
@@ -84,8 +56,6 @@ from CLIENTS c
 join max_p m
 	on m.client=c.client
 	and m.payment=c.payment;
-
-
 
 
 ------Calculate the daily running total (balance).
