@@ -23,19 +23,69 @@ insert into CLIENTS values(1, 'Кредит1', 10000),
 (1, 'Ипотека1', 50000),
 (1, 'Кредит3', 5500),
 (1, 'Кредит4', 5600),
-(2, 'Кредит1', 20000),
-(2, 'Кредит2', 20000),
+(2, 'Кредит1', 30000),
+(2, 'Кредит2', 40000),
+(2, 'Карта1', 4000),
+(2, 'Карта2', 4000),
+(2, 'Карта3', 4000),
+(2, 'Карта4', 4000),
 
 (3, 'Кредит1', 10000),
 (3, 'Кредит2', 7000),
 (3, 'Карта1', 6000),
 (3, 'Кредит3', 5500),
 (3, 'Кредит4', 5600),
-(3, 'Кредит5', 6000)	
+(3, 'Кредит5', 6000),	
 --(3, 'Ипотека1', 50000)
-;
 
---Solution
+(4, 'Кредит1', 30000),
+(4, 'Кредит2', 40000),
+(4, 'Карта1', 5100),
+(4, 'Карта2', 5100),
+(4, 'Карта3', 5100),
+(4, 'Карта4', 100),
+(4, 'Карта5', 100),
+(4, 'Карта6', 100),
+(4, 'Карта7', 100),
+(4, 'Кредит3', 10000)
+
+	
+--first solution
+select client
+from CLIENTS
+where payment > 5000
+group by client
+having count(payment) > 5
+INTERSECT
+select client
+from CLIENTS
+group by client
+having avg(payment) > 10000;
+
+--second solution
+select client
+from CLIENTS
+where client in  (
+      select client
+      from CLIENTS
+      where payment > 5000
+      group by client
+      having count(payment) > 5)
+group by client
+having avg(payment) > 10000;
+
+--third solution
+select cc.client
+from CLIENTS c
+right join CLIENTS cc
+on c.client = cc.client and c.product = cc.product
+and c.payment > 5000
+group by cc.client
+having count(c.payment) > 5 and avg(cc.payment) > 10000;
+
+--wrong simple solution 
+/*avg payment of client 4 is 9570. this client should not be included.
+The result should not include the clients who have avg payment above 10K of only payments that are above 5k - all payments should be counted*/
 select client
 from CLIENTS
 where payment > 5000
