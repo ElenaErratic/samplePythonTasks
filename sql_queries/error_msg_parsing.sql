@@ -63,7 +63,7 @@ SELECT 'Listed Derivatives' AS "Asset Class"
 	, COUNT(err.SUBSTRINGS) AS "Number of errors"
 		
 FROM ld_errors err
-WHERE LENGTH(err.SUBSTRINGS > 1)
+WHERE LENGTH(err.SUBSTRINGS) > 1
 GROUP BY 
 	'Listed Derivatives' AS "Asset Class"
 	, TO_CHAR(err.LOAD_DATE_D, 'YYYY-MM')
