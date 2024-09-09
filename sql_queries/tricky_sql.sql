@@ -94,6 +94,7 @@ having count(payment) > 5  and avg(payment) > 10000;
 
 
 ------Select the maximum monthly payment per client and specify the product.
+--For Oracle:
 WITH max_p AS
 (
 select client, max(payment) as payment
@@ -107,6 +108,12 @@ join max_p m
 	on m.client=c.client
 	and m.payment=c.payment;
 
+--For most other dialects:
+select client, product, max(payment) as payment
+from CLIENTS
+group by client;
+
+
 ------Calculate the average payment per client. The data may be null for some clients.
 select client, avg(ifnull(payment,0)) 
 from clients 
@@ -114,7 +121,7 @@ group by client
 order by client;
 	
 --also possible: coalesce; in other dialects: isnull; nvl (oracle)
---Compare: It is also possible to use 'over partition by' but without 'group by' it would yield all rows of the table, whereas adding group by
+--Compare: It is also possible to use 'over partition by' but without 'group by' it would yield all rows of the table, whereas adding 'group by'
 --to this function collapses rows to show only distinct grouping values.
 
 
