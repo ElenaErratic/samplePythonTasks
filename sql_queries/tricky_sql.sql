@@ -191,6 +191,10 @@ from (select boss_user_id, count(user_id) as s_count
         from db
         group by boss_user_id) db2;
 
+---В некоторых случаях подойдет упрощенное решение (например, если у подчиненного всегда только один начальник):
+select count(distinct bossid)/count(distinct userid) as "Average Subordinate Count"
+	from db;
+
 --3
 select db1.user_id --, db1.payment "Subordinate Payment", db2.payment as "Boss Payment"
 from db as db1, db as db2
