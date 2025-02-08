@@ -54,14 +54,14 @@ FROM not_null_venues
 
 -- Get the number of trades whose venue values are all null per trade execution date and trade event dates.
 SELECT --+ parallel(16)
-	TO_CHAR(err.TRADE_DATE_D, 'YYYY-MM') AS "Trade Execution Date"
-	, TO_CHAR(err.LOAD_DATE_D, 'YYYY-MM') AS "Event Load Date"
-	, COUNT(DISTINCT xra.TRADE_ID_C) AS "Trade Number"
+	TO_CHAR(xra.TRADE_DATE_D, 'YYYY-MM') AS "Trade Execution Date"
+	, TO_CHAR(xra.LOAD_DATE_D, 'YYYY-MM') AS "Event Load Date"
+	, COUNT(DISTINCT xra.TRADE_ID_C) AS "Number of Trades"
 FROM all_null_venues anv
 INNER JOIN CR_OWNER.XYZ_REPORT_ATTR xra
 	on anv.TRADE_ID_C = xra.TRADE_ID_C
 GROUP BY
-	TO_CHAR(err.TRADE_DATE_D, 'YYYY-MM')
-	, TO_CHAR(err.LOAD_DATE_D, 'YYYY-MM')
+	TO_CHAR(xra.TRADE_DATE_D, 'YYYY-MM')
+	, TO_CHAR(xra.LOAD_DATE_D, 'YYYY-MM')
 ORDER BY 1 DESC, 2 DESC
 ;
