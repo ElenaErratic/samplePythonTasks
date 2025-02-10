@@ -206,19 +206,18 @@ where db1.boss_user_id = db2.user_id
 --TOP 3 earners
 /*Find out who earns the most money in each of the company's departments. A high earner in a department is an employee who has a salary in the top three _unique_ salaries for that department.
 */
+--Solution 1
 WITH earners_rank AS
 (
     SELECT departmentId, name, salary,
         DENSE_RANK() OVER (PARTITION BY departmentId ORDER BY salary DESC) dr
     FROM employee
 ),
-
 top3_earners as
 (
     SELECT * from earners_rank
     WHERE dr < 4
 )
-
 SELECT 
     dep.name "Department", 
     te.name "Employee", 
@@ -226,3 +225,122 @@ SELECT
 FROM top3_earners te
 JOIN department dep
 ON dep.id=te.departmentId
+
+--Solution2
+select d.name as department , e1.name as employee, e1.salary as Salary
+from employee e1 join department d on e1.departmentId = d.Id
+where  3 > (select count(distinct (e2.Salary))
+            from employee e2
+            where e2.Salary > e1.Salary
+            and e1.departmentId = e2.departmentId)
+
+
+--SALARY RANKING
+/*
+Write a solution to calculate the number of bank accounts for each salary category. The salary categories are:
+"Low Salary": All the salaries strictly less than $20000.
+"Average Salary": All the salaries in the inclusive range [$20000, $50000].
+"High Salary": All the salaries strictly greater than $50000.
+The result table must contain all three categories. If there are no accounts in a category, return 0.
+Output: 
++----------------+----------------+
+| category       | accounts_count |
++----------------+----------------+
+| Low Salary     | 1              |
+| Average Salary | 0              |
+| High Salary    | 3              |
++----------------+----------------+
+*/
+
+select  
+    'Low Salary' as category,
+    ifnull(count(case when income < 20000 then 'Low Salary' end),0) as accounts_count
+from accounts
+UNION
+select  
+    'Average Salary' as category,
+    ifnull(count(case when income >= 20000 and income <= 50000 then 'Average Salary' end),0) as accounts_count
+from accounts
+UNION
+select  
+    'High Salary' as category,
+    ifnull(count(case when income > 50000 then 'High Salary' end),0) as accounts_count
+from accounts
+---Even better: COUNT(if(income<20000,1,null)) AS accounts_count
+	
+
+--Second Highest Salary
+/*
+Write a solution to find the second highest distinct salary from the Employee table. If there is no second highest salary, return null 
+*/
+
+WITH salary_ranking AS
+(
+    SELECT id, salary,
+        DENSE_RANK() OVER (ORDER BY salary DESC) dr
+    FROM employee
+)
+select max(salary) as SecondHighestSalary -- max is needed at least in MySQL to return null properly if there are no matching values
+from salary_ranking
+where dr = 2
+
+	
+--Investments in 2016
+/*
+Table: Insurance
++-------------+-------+
+| Column Name | Type  |
++-------------+-------+
+| pid         | int   |
+| tiv_2015    | float |
+| tiv_2016    | float |
+| lat         | float |
+| lon         | float |
++-------------+-------+
+Write a solution to report the sum of all total investment values in 2016 tiv_2016, for all policyholders who:
+
+have the same tiv_2015 value as one or more other policyholders, and
+are not located in the same city as any other policyholder (i.e., the (lat, lon) attribute pairs must be unique).
+Round tiv_2016 to two decimal places.
+*/
+
+--solution1
+
+SELECT ROUND(SUM(tiv_2016), 2) AS tiv_2016
+FROM Insurance
+WHERE tiv_2015 IN (
+    SELECT tiv_2015
+    FROM Insurance
+    GROUP BY tiv_2015
+    HAVING COUNT(*) > 1
+)
+AND (lat, lon) IN (
+    SELECT lat, lon
+    FROM Insurance
+    GROUP BY lat, lon
+    HAVING COUNT(*) = 1
+
+--solution2
+
+WITH cities AS
+(
+select lat, lon, count(*) count
+from insurance
+group by lat, lon
+),
+
+tiv_2015_counts AS
+(
+    select tiv_2015, count(*) count
+    from insurance
+    group by tiv_2015
+)
+
+select round(sum(i.tiv_2016),2) as tiv_2016
+from insurance i
+join cities c
+on i.lat = c.lat and i.lon = c.lon and c.count = 1
+join tiv_2015_counts tc
+on i.tiv_2015 = tc.tiv_2015 and tc.count > 1
+
+
