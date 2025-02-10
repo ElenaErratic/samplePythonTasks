@@ -200,3 +200,29 @@ select db1.user_id --, db1.payment "Subordinate Payment", db2.payment as "Boss P
 from db as db1, db as db2
 where db1.boss_user_id = db2.user_id
   and db1.payment > db2.payment;
+
+
+
+--TOP 3 earners
+/*Find out who earns the most money in each of the company's departments. A high earner in a department is an employee who has a salary in the top three _unique_ salaries for that department.
+*/
+WITH earners_rank AS
+(
+    SELECT departmentId, name, salary,
+        DENSE_RANK() OVER (PARTITION BY departmentId ORDER BY salary DESC) dr
+    FROM employee
+),
+
+top3_earners as
+(
+    SELECT * from earners_rank
+    WHERE dr < 4
+)
+
+SELECT 
+    dep.name "Department", 
+    te.name "Employee", 
+    te.salary "Salary"
+FROM top3_earners te
+JOIN department dep
+ON dep.id=te.departmentId
